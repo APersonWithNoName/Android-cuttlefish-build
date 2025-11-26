@@ -1,0 +1,11 @@
+android-cuttlefish/
+ 
+bazel-cache
+
+output
+
+dist
+
+*.gz
+*.deb
+

@@ -1,0 +1,53 @@
+name: Build Android Cuttlefish for ARM64 Linux
+on:
+  workflow_dispatch # 手动触发
+
+jobs:
+  build-cuttlefish:
+    strategy:
+      matrix:
+        arch: [ ubuntu-24.04-arm ]
+        python-version: [ 3.8 ]
+    runs-on: ${{ matrix.arch }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+#      - name: Set up QEMU for ARM64
+#        uses: docker/setup-qemu-action@v3
+#        with:
+#          platforms: arm64
+
+      - name: Cleaning Host Env
+        run: |
+          bash ./shells/cleanenv.sh
+
+      - name: Build Cuttlefish
+        run: |
+          bash ./shells/build-host.sh
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2.0.8
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          name: "Android Cuttlefish ARM64 - $(date +'%Y-%m-%d')"
+          tag_name: build-${{ github.run_number }}-${{ github.sha }}
+          make_latest: true
+          draft: false
+          generate_release_notes: true
+          prerelease: false
+          files: |
+            dist/*.gz
+            output/*.deb

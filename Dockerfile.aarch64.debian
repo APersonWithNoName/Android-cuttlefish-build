@@ -1,0 +1,34 @@
+FROM arm64v8/debian:latest
+
+# 输出系统基本信息
+RUN cat /etc/os-release
+
+# 安装基本工具
+RUN apt-get update && \
+		apt-get install -y \
+		build-essential \
+        git \
+        wget \
+        unzip \
+        python3 \
+        python3-pip \
+        cmake \
+        openjdk-17-jdk \
+        golang-go
+# 安装 bazel
+RUN wget https://github.com/bazelbuild/bazel/releases/download/8.4.2/bazel-8.4.2-linux-arm64 -O /usr/local/bin/bazel \
+		chmod +x /usr/local/bin/bazel
+
+# 设置 workspace
+RUN mkdir -p /workspace && \
+		mkdir -p /workspace/src && \
+		mkdir -p /workspace/output
+
+# 指定 workspace
+WORKDIR /workspace
+
+# 复制文件
+COPY shells/build-docker.sh /workspace/
+
+# 使用脚本作为入口点
+ENTRYPOINT ["/workspace/build-docker.sh"]
