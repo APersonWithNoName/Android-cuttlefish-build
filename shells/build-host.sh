@@ -8,10 +8,6 @@ REPO_NAME=android-cuttlefish
 echo "Entering host build environment."
 
 # 克隆储存库
-if test -d $REPO_NAME;then
-    echo "--- Removing dir $REPO_NAME"
-    rm -rf $REPO_NAME
-fi
 echo "--- Cloning repo from $REPO_URL to $REPO_NAME"
 git clone $REPO_URL $REPO_NAME --depth 1
 
@@ -30,7 +26,7 @@ echo "--- Running docker."
 echo "----- Mounting host:$PWD/$REPO_NAME to $DOCKER_NAME:/workspace/src/$REPO_NAME"
 echo "----- Mounting host:$PWD/bazel-cache to $DOCKER_NAME:/root/.cache/bazel"
 docker run --rm \
-    -v $PWD/$REPO_NAME:/workspace/src \
+    -v $PWD/$REPO_NAME:/workspace/src/$REPO_NAME \
     -v $PWD/bazel-cache:/root/.cache/bazel \
     -v $PWD/output:/workspace/output \
     -v $PWD/dist:/workspace/dist \
