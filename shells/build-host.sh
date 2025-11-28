@@ -23,7 +23,7 @@ echo "--- Making dir dist"
 
 echo "--- Building docker container."
 cp ./Dockerfile.aarch64.debian Dockerfile
-docker build -t $DOCKER_NAME $PWD
+docker build -t $DOCKER_NAME:latest $PWD
 
 echo "--- Running docker."
 echo "----- Mounting host:$PWD/$REPO_NAME to $DOCKER_NAME:/workspace/src/$REPO_NAME"
