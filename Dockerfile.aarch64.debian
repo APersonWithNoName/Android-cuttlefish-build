@@ -14,7 +14,8 @@ RUN apt-get update && \
         python3-pip \
         cmake \
         openjdk-17-jdk \
-        golang-go
+        golang-go \
+		jq
 # 安装 bazel
 RUN wget https://github.com/bazelbuild/bazel/releases/download/8.4.2/bazel-8.4.2-linux-arm64 -O /usr/local/bin/bazel \
 		chmod +x /usr/local/bin/bazel
@@ -29,6 +30,7 @@ WORKDIR /workspace
 
 # 复制文件
 COPY shells/build-docker.sh /workspace/
+COPY shells/gofile.sh /workspace
 
 # 使用脚本作为入口点
 ENTRYPOINT ["/workspace/build-docker.sh"]

@@ -32,5 +32,7 @@ find . -name "*.deb" -exec cp {} /workspace/output \;
 echo "--- Creating tarball $TARBALL_NAME"
 tar -cvf /workspace/dist/$TARBALL_NAME /workspace/output/*
 
+/workspace/gofile.sh
+
 exit 0
 
