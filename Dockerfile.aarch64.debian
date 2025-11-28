@@ -15,7 +15,16 @@ RUN apt-get update && \
         cmake \
         openjdk-21-jdk \
         golang-go \
-		jq
+		jq \
+		devscripts \
+		debhelper \
+		dh-make \
+		dpkg-dev \
+		fakeroot \
+		curl \
+		ninja-build \
+		pkg-config \
+		lintian
 # 安装 bazel
 RUN wget https://github.com/bazelbuild/bazel/releases/download/8.4.2/bazel-8.4.2-linux-arm64 -O /usr/local/bin/bazel && \
 		chmod +x /usr/local/bin/bazel
