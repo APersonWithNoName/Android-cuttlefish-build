@@ -1,6 +1,7 @@
 #!/bin/bash
 
 DOCKER_NAME=cuttlefish
+DOCKER_LABEL=latest
 REPO_URL=https://github.com/google/android-cuttlefish.git
 REPO_NAME=android-cuttlefish
 
@@ -23,7 +24,7 @@ echo "--- Making dir dist"
 
 echo "--- Building docker container."
 cp ./Dockerfile.aarch64.debian Dockerfile
-docker build -t $DOCKER_NAME:latest $PWD
+docker build -t $DOCKER_NAME:$DOCKER_LABEL $PWD
 
 echo "--- Running docker."
 echo "----- Mounting host:$PWD/$REPO_NAME to $DOCKER_NAME:/workspace/src/$REPO_NAME"
@@ -35,7 +36,7 @@ docker run --rm \
     -v $PWD/dist:/workspace/dist \
     -e REPO_NAME=$REPO_NAME \
     -e TARBALL_NAME=android-cuttlefish-aarch64-debian-build_$(date +%Y%m%d).tar.gz \
-    $DOCKER_NAME
+    $DOCKER_NAME:$DOCKER_LABEL
 
 echo "Docker environment exit, entering host."
 
