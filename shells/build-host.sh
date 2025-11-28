@@ -22,12 +22,13 @@ mkdir -p output
 echo "--- Making dir dist"
 
 echo "--- Building docker container."
+cp ./Dockerfile.aarch64.debian Dockerfile
 docker build -t $DOCKER_NAME $PWD
 
 echo "--- Running docker."
 echo "----- Mounting host:$PWD/$REPO_NAME to $DOCKER_NAME:/workspace/src/$REPO_NAME"
 echo "----- Mounting host:$PWD/bazel-cache to $DOCKER_NAME:/root/.cache/bazel"
-docker run -rm \
+docker run --rm \
     -v $PWD/$REPO_NAME:/workspace/src \
     -v $PWD/bazel-cache:/root/.cache/bazel \
     -v $PWD/output:/workspace/output \
