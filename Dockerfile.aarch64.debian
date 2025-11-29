@@ -24,7 +24,8 @@ RUN apt-get update && \
 		curl \
 		ninja-build \
 		pkg-config \
-		lintian
+		lintian \
+		pbuilder
 # 安装 bazel
 RUN wget https://github.com/bazelbuild/bazel/releases/download/8.4.2/bazel-8.4.2-linux-arm64 -O /usr/local/bin/bazel && \
 		chmod +x /usr/local/bin/bazel
