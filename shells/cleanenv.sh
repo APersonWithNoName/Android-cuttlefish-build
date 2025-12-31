@@ -14,5 +14,5 @@ remove_pkg g++-12 g++-13 g++-14
 remove_pkg mysql-server-8.0 mysql-client-8.0
 remove_pkg php8.3 php8.3-*
 
-sudo apt autoremove -y --purge /dev/null
+sudo apt autoremove -y --purge > /dev/null
 
