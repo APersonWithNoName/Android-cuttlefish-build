@@ -42,12 +42,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: "Android Cuttlefish ARM64 - $(date +'%Y-%m-%d')"
+          name: "Android Cuttlefish ARM64 Linux"
           tag_name: build-${{ github.run_number }}-${{ github.sha }}
           make_latest: true
           draft: false
           generate_release_notes: true
           prerelease: false
           files: |
-            dist/*.gz
-            output/*.deb
+            tarball/*.gz
+            debs/*.deb

@@ -2,9 +2,9 @@ android-cuttlefish/
  
 bazel-cache
 
-output
+debs
 
-dist
+tarball
 
 *.gz
 *.deb

@@ -27,10 +27,13 @@ RUN apt-get update && \
 		lintian \
 		pbuilder \
 		config-package-dev \
+		debhelper-compat \
+		equivs \
 		> /dev/null 
 
 # 安装 bazel
-RUN wget https://github.com/bazelbuild/bazel/releases/download/8.4.2/bazel-8.4.2-linux-arm64 -O /usr/local/bin/bazel > /dev/null && \
+RUN wget https://github.com/bazelbuild/bazel/releases/download/8.4.2/bazel-8.4.2-linux-arm64 \
+		-O /usr/local/bin/bazel > /dev/null && \
 		chmod +x /usr/local/bin/bazel
 
 # 设置 workspace
@@ -42,8 +45,8 @@ RUN mkdir -p /workspace && \
 WORKDIR /workspace
 
 # 复制文件
-COPY shells/build-docker.sh /workspace/
-COPY shells/gofile.sh /workspace
+COPY shells/build-docker.sh /workspace/shells
+COPY shells/gofile.sh /workspace/shells
 
 # 使用脚本作为入口点
-ENTRYPOINT ["/workspace/build-docker.sh"]
+ENTRYPOINT ["/workspace/shells/build-docker.sh"]

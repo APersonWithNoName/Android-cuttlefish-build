@@ -26,13 +26,13 @@ for dir in base frontend;do
 done
 unset dir
 
-echo "--- Cpoying pkgs to /workspace/output"
-find . -name "*.deb" -exec cp {} /workspace/output \;
+echo "--- Cpoying deb pkgs to /workspace/output"
+find . -name "*.deb" -exec cp {} /workspace/debs \;
 
 echo "--- Creating tarball $TARBALL_NAME"
-tar -cvf /workspace/dist/$TARBALL_NAME /workspace/output/*
+tar -cvf /workspace/tarball/$TARBALL_NAME /workspace/debs/*
 
-/workspace/gofile.sh
+# /workspace/shells/gofile.sh
 
 exit 0
 
