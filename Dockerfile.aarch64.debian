@@ -32,8 +32,7 @@ RUN apt-get update && \
 		> /dev/null 
 
 # 安装 bazel
-RUN wget https://github.com/bazelbuild/bazel/releases/download/8.4.2/bazel-8.4.2-linux-arm64 \
-		-Oq /usr/local/bin/bazel > /dev/null && \
+RUN wget -q https://github.com/bazelbuild/bazel/releases/download/8.4.2/bazel-8.4.2-linux-arm64 -O /usr/local/bin/bazel > /dev/null && \
 		chmod +x /usr/local/bin/bazel
 
 # 设置 workspace
