@@ -45,8 +45,8 @@ RUN mkdir -p /workspace && \
 WORKDIR /workspace
 
 # 复制文件
-COPY shells/build-docker.sh /workspace/shells
-COPY shells/gofile.sh /workspace/shells
+COPY shells/build-docker.sh /workspace/shells/build-docker.sh
+COPY shells/gofile.sh /workspace/shells/gofile.sh
 
 # 使用脚本作为入口点
 ENTRYPOINT ["/workspace/shells/build-docker.sh"]
