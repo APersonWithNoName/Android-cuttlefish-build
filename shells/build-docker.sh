@@ -16,6 +16,10 @@ echo "--- Changing dir to $REPO_NAME"
 cd /workspace/src/$REPO_NAME
 
 echo "--- Start building."
+export GOFLAGS="-buildvcs=false"
+git config --global --add safe.directory "$PWD"
+git config --global user.email "ci@example.com"
+git config --global user.name "CI"
 for dir in base frontend;do
     echo "----- Entering $dir"
     cd $dir
